@@ -183,6 +183,8 @@ Module Module1
     Private Screen As ScreenBufferData
     Private ConWrite As ConsoleWriter
 
+    Private Const FRAMERATE_LOCK As UInteger = (1000 / 30) 'Lock at 60 FPS / 60
+
     Private Function InitData() As Boolean
         InfoBag.ScreenInf.Height = 40
         InfoBag.ScreenInf.Width = 120
@@ -233,8 +235,11 @@ Module Module1
         map &= "#..............#"
         map &= "################"
 
+        Dim CapTimer As New mTimer.myTimer()
         Dim firstrun As Boolean = True
         While (InfoBag.Running)
+            CapTimer.StartMe() 'Testing FPS timer
+
             TimePart2 = System.Environment.TickCount
             Dim TimeElapsed As Double = (TimePart2 - TimePart1) 'gettickcount equiv
             TimePart1 = TimePart2
@@ -369,7 +374,13 @@ Module Module1
             End If
 
             ConWrite.Add(Screen.Data())
-            Threading.Thread.Sleep(10)
+
+            Console.Title = "CommandLineFPS FPS:" & CapTimer.CalculateFPS().ToString()
+
+            Dim frameticks As UInteger = CapTimer.GetDelta()
+            If frameticks < FRAMERATE_LOCK Then
+                Threading.Thread.Sleep(FRAMERATE_LOCK - frameticks)
+            End If
         End While
     End Sub
 
