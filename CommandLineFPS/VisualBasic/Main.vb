@@ -193,8 +193,8 @@ Module Module1
         InfoBag.MapInf.Height = 16
         InfoBag.MapInf.Width = 16
 
-        InfoBag.Player.X = 8.0F
-        InfoBag.Player.Y = 8.0F
+        InfoBag.Player.X = 2.0F
+        InfoBag.Player.Y = 2.0F
         InfoBag.Player.A = 0.0F
         InfoBag.Player.FOV = 3.14159F / 4.0F
 
