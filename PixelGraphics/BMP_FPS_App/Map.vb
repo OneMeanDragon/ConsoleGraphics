@@ -103,7 +103,7 @@
         Width = w
         Height = h
         '------------------------------------------------------------------------
-        If strMapData.Length() < (w * h) Then Return 'get fucked, throw an error
+        If strMapData.Length() <> (w * h) Then Return 'get fucked, throw an error
         '------------------------------------------------------------------------
         MapData = strMapData
         BlockSize = SquareSize
